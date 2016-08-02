@@ -1,0 +1,28 @@
+<html>
+
+<head></head>
+
+<body>
+    <div id="div">text</div>
+    <script>
+    var tag = document.getElementById('div');
+    var attr = div.getAttributeNode('id');
+    var text = div.firstChild;
+
+    var obj = {a:1};
+
+    tag.number = 1;
+    tag.string = 'string';
+    tag.obj = obj;
+
+    attr.number = 1;
+    attr.string = 'string';
+    attr.obj = obj;
+
+    text.number = 1;
+    text.string = 'string';
+    text.obj = obj;
+    </script>
+</body>
+
+</html>
