@@ -61,3 +61,4 @@ return: 返回渲染函数 function(data){...}
 ## EXAMPLE
 * [hello world](https://cdn.rawgit.com/wusfen/domTpl/master/example/helloWorld.html) | [源码](example/helloWorld.html)
 * [list](https://cdn.rawgit.com/wusfen/domTpl/master/example/list.html) | [源码](example/list.html)
+* [performance test 性能测试](https://cdn.rawgit.com/wusfen/domTpl/master/example/bigArray.html) | [源码](example/bigArray.html)
