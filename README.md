@@ -62,4 +62,5 @@ return: 返回渲染函数 function(data){...}
 * [hello world](https://cdn.rawgit.com/wusfen/domTpl/master/example/helloWorld.html) | [源码](example/helloWorld.html)
 * [list](https://cdn.rawgit.com/wusfen/domTpl/master/example/list.html) | [源码](example/list.html)
 * [ajax](https://cdn.rawgit.com/wusfen/domTpl/master/example/ajax.html) | [源码](example/ajax.html)
+* [time 时钟](https://cdn.rawgit.com/wusfen/domTpl/master/example/time.html) | [源码](example/time.html)
 * [performance test 性能测试](https://cdn.rawgit.com/wusfen/domTpl/master/example/bigArray.html) | [源码](example/bigArray.html)

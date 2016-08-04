@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="../domTpl.js"></script>
+  <style>
+  body{font-size: 4em; font-family: "微软雅黑"; text-align: center; margin: 10%}
+  small{color: #aaa; font-size: 0.6em}
+  </style>
+</head>
+<body>
+  <strong>{{dateFormat(date, 'HH:mm:ss')}}</strong>
+  <small>{{dateFormat(date, 'SSS')}}</small>
+  <div>
+    <small>{{dateFormat(date, 'yyyy-MM-dd E')}}</small>
+  </div>
+  <script>
+    var render = domTpl();
+    (function run(){
+      render({
+        date: new Date
+      });
+
+      setTimeout(run, 41.666667);
+    })();
+
+    function dateFormat(date, format) {
+      var map = {
+        y: date.getFullYear(),
+        M: date.getMonth()+1,
+        d: date.getDate(),
+        H: date.getHours(),
+        m: date.getMinutes(),
+        s: date.getSeconds(),
+        S: date.getMilliseconds()
+      };
+      for(var key in map){
+        format = format.replace(RegExp(key+'+', 'g'), function(s){
+          return (Array(s.length).join(0)+map[key]).slice(-s.length)
+        })
+      }
+
+      return format.replace(/E+/g, function(){
+        return '星期'+'日一二三四五六'[date.getDay()]
+      })
+    }
+  </script>
+</body>
+</html>
