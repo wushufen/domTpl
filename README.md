@@ -1,5 +1,5 @@
 # domTpl
-基于 dom 的高性能模板引擎，
+基于 dom 的高性能模板引擎
 
 ## 特性
 * 基于dom而不是字符串
@@ -7,7 +7,7 @@
 * 支持传参，模板内支持访问全局变量
 * 有进行缓存、传参转为内部变量（不用 with）、过滤频繁更新dom的中间状态等方式优化性能
 * 简单高效
-* 体积小
+* 体积小，无依赖
 * 支持 require.js, sea.js
 * 兼容ie6+（下个版本）
 
@@ -61,4 +61,5 @@ return: 返回渲染函数 function(data){...}
 ## EXAMPLE
 * [hello world](https://cdn.rawgit.com/wusfen/domTpl/master/example/helloWorld.html) | [源码](example/helloWorld.html)
 * [list](https://cdn.rawgit.com/wusfen/domTpl/master/example/list.html) | [源码](example/list.html)
+* [ajax](https://cdn.rawgit.com/wusfen/domTpl/master/example/ajax.html) | [源码](example/ajax.html)
 * [performance test 性能测试](https://cdn.rawgit.com/wusfen/domTpl/master/example/bigArray.html) | [源码](example/bigArray.html)

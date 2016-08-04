@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="../domTpl.js"></script>
+  </head>
+  <body>
+    <ul>
+      <li if="loading">loading...</li>
+      <li each="item in list">{{item}}</li>
+    </ul>
+    <script>
+      var scope = {list:[], loading:true};
+      var render = domTpl(scope);
+
+      ajax({
+        url:'ajax.json',
+        dataType:'json',
+        success:function(rsp){
+          scope.loading = false;
+          scope.list = rsp;
+          render();
+        },
+        error: function () {
+          alert('error')
+        }
+      })
+
+      function ajax(options) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(){
+          // console.log(xhr.readyState, xhr.status, xhr.responseText);
+          if (xhr.readyState==4){
+            if(xhr.status==0||xhr.status==200||xhr.status==304) {
+              options.success&&options.success(
+                options.dataType=='json'?
+                eval(xhr.responseText): xhr.responseText
+              );
+            }else{
+              options.error&&options.error();
+            }
+          }
+        };
+        xhr.open(options.type||'GET', options.url, options.async||true);
+        xhr.send();
+      }
+    </script>
+  </body>
+</html>
