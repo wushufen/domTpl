@@ -9,7 +9,7 @@
   </style>
 </head>
 <body>
-  <strong>{{dateFormat(date, 'HH:mm:ss')}}</strong>
+  <strong>{{dateFormat(date, 'hh:mm:ss')}}</strong>
   <small>{{dateFormat(date, 'SSS')}}</small>
   <div>
     <small>{{dateFormat(date, 'yyyy-MM-dd E')}}</small>
@@ -30,6 +30,7 @@
         M: date.getMonth()+1,
         d: date.getDate(),
         H: date.getHours(),
+        h: function(){var h=date.getHours(); return h>12?h-12:h}(),
         m: date.getMinutes(),
         s: date.getSeconds(),
         S: date.getMilliseconds()
