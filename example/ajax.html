@@ -9,22 +9,30 @@
       <li each="item in list">{{item}}</li>
     </ul>
     <script>
+      // 数据
       var scope = {list:[], loading:true};
+
+      // domTpl 编译模板并使用 sope 渲染视图
+      // 返回 render 函数，之后数据变动时，调用 render 更新视图
       var render = domTpl(scope);
 
+      // 请求数据
       ajax({
         url:'ajax.json',
         dataType:'json',
         success:function(rsp){
+
+          // 修改数据
           scope.loading = false;
           scope.list = rsp;
+
+          // 更新视图
           render();
-        },
-        error: function () {
-          alert('error')
         }
       })
 
+
+      // 封装 ajax
       function ajax(options) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function(){
