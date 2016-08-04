@@ -115,6 +115,11 @@ function setNodeUid(node, baseUid, index) {
         if (canSetUidOnNode) {
             node.uid = _uid;
         }
+        // todo 可以考虑保存到 node.nodeValue，因为只有 cloneNode 才须 getNodeUid
+        // 而且 cloneNode 的原节点不会显示
+        else{
+            // node.nodeValue = _uid;
+        }
 
         node.setAttribute && node.setAttribute('uid', _uid); // test
         node.parentNode && node.parentNode.insertBefore(document.createComment('uid:' + _uid), node); // test
@@ -329,15 +334,14 @@ function compile(node) {
 
         }
         // 属性，文本，注释 节点
-        else if (node.nodeType == 2 || node.nodeType == 3 || node.nodeType == 8) {
+        else if (node.nodeType == 2 || node.nodeType == 3 /*|| node.nodeType == 8*/) {
 
             // ie 低版本标签即使没有写某属性，也会在 tag.attributes 中
-            // ie8 下不支持 attr.nodeValue
-            // ie7 attr 下会奇怪地出现 true 的情况。如 [spellcheck], 所以要转成字符串
-            var text = (node.nodeValue || node.value || '') + '';
+            // ie7 attr 下会有 true 的情况。如 [spellcheck], 所以要转成字符串
+            var nodeValue = node.nodeValue + '';
 
             // 不含表达式则不处理
-            if (!text.match('{{')) {
+            if (!nodeValue.match('{{')) {
                 return
             }
 
@@ -345,7 +349,7 @@ function compile(node) {
             setNodeUid(node);
 
             // code
-            code += Array(indentN).join('  ') + '$$.V( $$.U(' + uid + ', [' + eachIndexNameArr + ']), ' + parse(text) + ')\n';
+            code += Array(indentN).join('  ') + '$$.V( $$.U(' + uid + ', [' + eachIndexNameArr + ']), ' + parse(nodeValue) + ')\n';
 
         }
     })(node);
@@ -426,11 +430,7 @@ function V(uid, str) {
         // save value
         vnode.value = str;
         // update dom
-        if (node.nodeType == 2) {
-            node.value = str;
-        } else if (node.nodeType == 3) {
-            node.nodeValue = str;
-        }
+        node.nodeValue = str;
     }
 }
 
@@ -557,7 +557,7 @@ function EACH(uid, direct, fn) {
     //     mark.nodeValue = node.cloneNode().outerHTML;
     // },100);m
 
-    var keys = Object.keys(list); // todo 考虑不使用这种方法，据说下标顺序可能不准确
+    var keys = Object.keys(list||[]); // todo 考虑不使用这种方法，据说下标顺序可能不准确
     var cloneLength = node.cloneLength || 0;
     var maxLength = Math.max(cloneLength, keys.length)
     for (var i = 0; i < maxLength; i++) {
