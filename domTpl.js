@@ -432,6 +432,11 @@
             // update dom
             node.nodeValue = str;
         }
+
+        // data-src
+        if (node.name == 'data-src') {
+            node.ownerElement.src = str;
+        }
     }
 
     /**
