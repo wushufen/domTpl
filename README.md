@@ -42,12 +42,12 @@
 
 ## API
 ```javascript
-domTpl(node, data)
+render = domTpl(node, data)
 ```
 ```javascript
 node: 可选。默认为 html 节点
 data: 可选。如果提供则直接渲染
-return: 返回渲染函数 function(data){...}
+redner(data): 编译返回的渲染函数
   data: 可选。如不提供则使用 domTpl 的参数 data
 ```
 
