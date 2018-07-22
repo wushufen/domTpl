@@ -1,0 +1,105 @@
+<html>
+
+<head>
+    <title>{{Math.random()}}</title>
+    <meta charset="utf-8">
+</head>
+
+<body if="true">
+
+
+<ul>
+	<li if="typeof list == 'undefined'">正在加载数据..</li>
+
+	<li if="0" each="user in list">
+		<span>{{user.name}}</span>
+		<span if="user.age>=18">adult</span>
+	</li>
+
+	<li if="list && !list.length">没有记录</li>
+</ul>
+
+
+
+	<div id="div">div</div>
+	<script>
+		var div = document.getElementById('div');
+	</script>
+
+    <div data="vm">
+        {{(obj)}}
+        <!-- {{obj.a}}+{{obj.b}}={{obj.a+obj.b}} -->
+        <input model="a" />
+        <input model="b" />
+        <a href="{{href}}">{{href}}</a>
+        <ul>
+            <li each="item in list">
+                {{$index}}: {{item}}
+                <span if="Math.random()>0.98"> Math.random()>0.98 </span>
+                <ul>
+                    <li each="item2 in item">
+                        {{item2}}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div if="bool">
+            {{bool}}
+        </div>
+    </div>
+    <script src="mvvm.js"></script>
+    <script>
+    i = 0
+    r = Math.random();
+    a = 10 + i
+    b = 20 + i
+    href = 'http://baidu.com?wd=' + i
+        //list.length = parseInt(r*100);
+    bool = r > 0.5
+    list = [1]
+    list.length = 100
+    // list.fill(10)
+    render = compile()
+
+
+    obj = {
+            a: 1,
+            b: 2,
+            c: {
+                c1: 3
+            }
+        }
+        // observe(obj, function(){
+        // 	render();
+        // })
+
+    render();
+
+
+
+    var lastDate = new Date;
+    t = setInterval(function() {
+            i++
+            r = Math.random();
+            a = 10 + i
+            b = 20 + i
+            href = 'http://baidu.com?wd=' + i
+                //list.length = parseInt(r*100);
+            bool = r > 0.5
+
+            list.length = 0
+            for (var li = 0; li < 1000; li++) {
+                list[li] = Math.random()
+            }
+
+            render();
+
+            var now = new Date;
+            document.title = now - lastDate;
+            lastDate = now;
+        }, 1)
+        // clearInterval(t)
+    </script>
+</body>
+
+</html>

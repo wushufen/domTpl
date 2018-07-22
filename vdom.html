@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <!-- comment -->
+    {{heading}}
+    <span if="bool">{{bool}}</span>
+    <ul>
+        <li for="item in list">
+            <img title="{{item.name}}" src=""> {{item.name}}
+            <span if="item.age>=18">18+</span>
+        </li>
+    </ul>
+    <script>
+    function createVnode(node) {
+        var vnode = {
+            // node: node,
+            // nodeName: node.nodeName,
+            // nodeType: node.nodeType,
+            // nodeValue: node.nodeValue,
+            // attributes: [],
+            // childNodes: [],
+        }
+        if (node.nodeType == 1) {
+            vnode.nodeName = node.nodeName;
+            var attributes = node.attributes;
+            for (var i = 0; i < attributes.length; i++) {
+                // vnode.attributes.push(createVnode(attributes[i]));
+            }
+            vnode.childNodes = [];
+            var childNodes = node.childNodes;
+            for (var i = 0; i < childNodes.length; i++) {
+                vnode.childNodes.push(createVnode(childNodes[i]));
+            }
+        }
+        if (node.nodeType==2) {
+            vnode.nodeName = node.nodeName;
+        }
+        if (node.nodeType==3) {
+            vnode.nodeValue = node.nodeValue;
+        }
+        return vnode;
+    }
+
+    /*
+
+	var vnode = {}
+
+    if(!bool){vnode=null}
+
+	ul(function(parent){
+    for(var $index in list){var item = list[$index];
+			parent.push(li())
+    }
+	})
+
+    */
+    function compile(node) {
+        if (node.nodeType == 1) {
+            var _if = node.getAttribute('if');
+            code = 'if()'
+        }
+    }
+    </script>
+</body>
+
+</html>

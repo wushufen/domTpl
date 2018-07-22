@@ -7,12 +7,13 @@
   <body>
     
     <!-- 2.模板 -->
-    hello {{name}} !
+    Hello {{name||'world'}} !
+    <input model="name" autofocus>
 
     <!-- 3.渲染 -->
     <script>
       domTpl({
-        name:'world'
+        name: 'domTpl.js'
       });
     </script>
   </body>

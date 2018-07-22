@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="../domTpl.js"></script>
+</head>
+
+<body>
+
+	<input model="filter" autofocus>
+    <ul>
+        <li each="item in list" .style="{display: item.match(filter)?'':'none'}"> {{item}} </li>
+    </ul>
+
+    <script>
+    dom = domTpl({
+    	list:[
+    		'apple',
+    		'boy',
+    		'cat',
+    		'dog'
+    	]
+    });
+    </script>
+</body>
+
+</html>

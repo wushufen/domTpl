@@ -1,56 +1,65 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <script src="../domTpl.js"></script>
-  </head>
-  <body>
+</head>
+
+<body>
     <ul>
-      <li if="loading">loading...</li>
-      <li each="item in list">{{item}}</li>
+        <li if="loading">loading...</li>
+        <li each="item in list">{{item}}</li>
     </ul>
     <script>
-      // 数据
-      var scope = {list:[], loading:true};
+    // 数据
+    var scope = {
+        list: null,
+        loading: true
+    };
 
-      // domTpl 编译模板并使用 sope 渲染视图
-      // 返回 render 函数，之后数据变动时，调用 render 更新视图
-      var render = domTpl(scope);
+    // domTpl 编译模板并使用 scope 渲染视图
+    // 返回 render 函数，之后数据变动时，调用 render 更新视图
+    var dom = domTpl(scope);
 
-      // 请求数据
-      ajax({
-        url:'ajax.json',
-        dataType:'json',
-        success:function(rsp){
+    // 请求数据
+    ajax({
+        url: 'ajax.json',
+        dataType: 'json',
+        success: function(rsp) {
 
-          // 修改数据
-          scope.loading = false;
-          scope.list = rsp;
+            // 修改数据
+            scope.loading = false;
+            scope.list = rsp;
 
-          // 更新视图
-          render();
+            // 更新视图
+            dom.$render();
         }
-      })
+    })
 
 
-      // 封装 ajax
-      function ajax(options) {
+    // 封装 ajax
+    function ajax(options) {
         var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function(){
-          // console.log(xhr.readyState, xhr.status, xhr.responseText);
-          if (xhr.readyState==4){
-            if(xhr.status==0||xhr.status==200||xhr.status==304) {
-              options.success&&options.success(
-                options.dataType=='json'?
-                eval(xhr.responseText): xhr.responseText
-              );
-            }else{
-              options.error&&options.error();
+        xhr.onreadystatechange = function() {
+            // console.log(xhr.readyState, xhr.status, xhr.responseText);
+            if (xhr.readyState == 4) {
+                if (xhr.status == 0 || xhr.status == 200 || xhr.status == 304) {
+                    options.success && options.success(
+                        options.dataType == 'json' ?
+                        eval(xhr.responseText) : xhr.responseText
+                    );
+                } else {
+                    options.error && options.error();
+                }
             }
-          }
         };
-        xhr.open(options.type||'GET', options.url, options.async||true);
-        xhr.send();
-      }
+        xhr.open(options.type || 'GET', options.url, options.async || true);
+
+        setTimeout(function() { // 模拟延时
+            xhr.send();
+        }, 1000)
+    }
     </script>
-  </body>
+</body>
+
 </html>

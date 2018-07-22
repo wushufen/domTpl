@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/wusfen/wu.tmpl.js/master/lib/animate.css"> -->
+    <style type="text/css">
+    body {
+        max-width: 960px;
+        padding: 1em;
+        margin: auto;
+    }
+    
+    input,
+    textarea,
+    select {
+        border: solid 1px #ddd;
+        border-radius: 3px;
+        padding: .375em .75em;
+        vertical-align: middle;
+    }
+    </style>
+    <title>{{this.r++}}</title>
+</head>
+
+<body>
+    <div>
+        <textarea style="width: 500px;height: 300px;position: fixed;right: 0" :value="JSON.stringify(vm,0,'  ')" on:input="vm.render(JSON.parse($this.value))"></textarea>
+        <h2>{ { } }</h2>
+        <div :title="title" on:click="alert(nodeValue)">{{nodeValue}}</div>
+        <div :contenteditable="bool">
+            <data>nodeValue
+                <br>
+            </data>
+        </div>
+        <!--  -->
+        <h2>text</h2>
+        <div text="text">init text</div>
+        <!--  -->
+        <h2>html</h2>
+        <div html="html">init&nbsp;html</div>
+        <!--  -->
+        <h2>attr</h2>
+        <div attr:title="title">attr:title</div>
+        <input :value="title">
+        <!--  -->
+        <h2>class</h2>
+        <div attr:class="classes">attr:class</div>
+        <!--  -->
+        <h2>style</h2>
+        <div attr:style="styles">attr:style</div>
+        <!--  -->
+        <h2>show</h2>
+        <div show="show">show</div>
+        <!--  -->
+        <h2>on</h2>
+        <input on:keyup="console.log($event)" on:click="console.log($event)" model.number="n">
+        <button on:click="this.n++">this.n++</button>
+        <button on:click.ctrl="alert">click.ctrl</button>
+        <input on:keyup.prevent.ctrl.shift.alt.13="$this.value='done'" title="on:keyup.prevent.ctrl.shift.alt.meta.13">
+        <a on:click.prevent href="http://baidu.com">click.prevent</a>
+        <!--  -->
+        <h2>model</h2>
+        <input model.trim.number="model" autofocus>
+        <textarea model="model"></textarea>
+        |
+        <input type="checkbox" model="checkbox"> |
+        <input type="radio" value="radio1" model="radioValue">
+        <input type="radio" value="radio2" model="radioValue"> |
+        <input type="checkbox" model="checkboxList" value="str">
+        <input type="checkbox" model="checkboxList" :value="1">
+        <input type="checkbox" model="checkboxList" :value="obj"> |
+        <select model="select">
+            <option>str</option>
+            <option value="value">"value"</option>
+            <option :value="1">1</option>
+            <option :value="obj">obj</option>
+        </select>
+        |
+        <select model="selectMultiple" multiple>
+            <option>str</option>
+            <option value="value">"value"</option>
+            <option :value="1">1</option>
+            <option :value="obj">obj</option>
+        </select>
+        <hr title="-------------------------">
+        <input model="model">
+        <textarea model="model"></textarea>
+        |
+        <input type="checkbox" model="checkbox"> |
+        <input type="radio" value="radio1" model="radioValue">
+        <input type="radio" value="radio2" model="radioValue"> |
+        <input type="checkbox" model="checkboxList" value="str">
+        <input type="checkbox" model="checkboxList" :value="1">
+        <input type="checkbox" model="checkboxList" :value="obj"> |
+        <select model="select">
+            <option>str</option>
+            <option value="value">"value"</option>
+            <option :value="1">1</option>
+            <option :value="obj">obj</option>
+        </select>
+        |
+        <select model="selectMultiple" multiple>
+            <option>str</option>
+            <option value="value">"value"</option>
+            <option :value="1">1</option>
+            <option :value="obj">obj</option>
+        </select>
+        <!--  -->
+        <h2>var</h2>
+        <div var="{_obj:{a:1,b:2}}">
+            {{_obj.a}}
+        </div>
+        <!--  -->
+        <h2>include</h2>
+        <!-- <ul>
+            <li each="item in list">
+                <span>{{item.name}}</span>
+                <ul>
+                    <li each="item in list.children"></li>
+                </ul>
+            </li>
+        </ul> -->
+        <!--  -->
+        <h2>if</h2>
+        <div>bool:{{bool}}, bool1:{{bool1}}, bool2:{{bool2}}</div>
+        <div if="bool">if: {{bool}}
+            <input value="autofocus" autofocus>
+        </div>
+        <div elseif="bool1">elseif: {{bool1}}</div>
+        <div elseif="bool2">elseif: {{bool2}}</div>
+        <div else>else</div>
+        <!--  -->
+        <h2>each</h2>
+        <button on:click="this.list.length=100">"this.list.length=100"</button>
+        <div each="(v,k,i) in obj">
+            {{i}}| {{k}}:{{v}}
+            <input model="obj[k]">
+        </div>
+        ---------
+        <span each="i in n" if="i%2==0">{{(i)}}</span>
+        ---------
+        <div each="(item,i) in list" class="animated zoomInRight" :style="{animationDelay:i*.1+'s'}">
+            {{i}}:{{list[i]}}
+            <input model="name" xautofocus>
+        </div>
+        =========
+        <ul>
+            <li each="item in list">
+                {{(item)}}
+                <button on:click="alert(item)">btn</button>
+                <ul>
+                    <li each="item2 in list2">
+                        {{item2}}
+                        <button on:click="console.log(this,$this,$this.nid,list,list2,$index,$value)">btn</button>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!--  -->
+    <script src="2.js"></script>
+    <!-- <script src="domTpl.js"></script> -->
+    <style type="text/css">
+    .c1 {
+        color: green;
+    }
+    </style>
+    <script type="text/javascript">
+    var obj = {
+        a: 10,
+        b: 20,
+    }
+    console.time('V')
+    vm = V({
+        r:0,
+        n: 10,
+        obj: obj,
+        nodeValue: 'nodeValue',
+        text: 'this is text',
+        html: '<a href="http://baidu.com" target="blank">baidu.com</a>',
+        title: 'this is\n title',
+        classes: {
+            c1: true,
+            c2: true
+        },
+        styles: {
+            width: 20,
+            height: '30px',
+            color: '#0af',
+        },
+        model: 'hello',
+        checkbox: true,
+        radio: true,
+        radioValue: 'radio2',
+        checkboxList: ['str', 1, obj],
+        select: obj,
+        selectMultiple: ['str', 'value', 1, obj],
+        bool: false,
+        list: [1, 2, 3, {
+            name: 5,
+            age: 5
+        }],
+        list2: [
+            11, 22, 33
+        ],
+        // list: Array(500).fill(0).map(function(v, i, a) {
+        //     return i
+        // }),
+        click: function() {
+            this.model += '.'
+        }
+    })
+    console.timeEnd('V')
+
+    vm.nodeValue = 'on dom ready'
+    </script>
+</body>
+
+</html>

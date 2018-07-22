@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="../../console.js/console.js"></script>
+    <style type="text/css"> .console {font-size: 12px; font-family: "微软雅黑"; position: fixed; bottom: 0; right: 0; width: 100%; max-width: 100%; background: rgba(255, 255, 255, .6); box-shadow: 0 0 10px 10px rgba(169, 163, 163, 0.06); text-shadow: 1px 1px 2px rgb(77, 150, 255); } .list {max-height: 250px; overflow: auto; padding-right: 16px; width: 100%; } .list pre {margin: 0; border-bottom: solid 1px #eee; margin-bottom: -1px; padding: 6px; } textarea {display: block; width: 100%; border: none; border-top: solid 1px #ccc; outline: none; } </style> 
+    <script src="../domTpl.js"></script>
+    <style type="text/css">
+    .fadeInUp-transition {
+        -webkit-animation-duration: .5s;
+        animation-duration: .5s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+    }
+    
+    .fadeInUp-enter {
+        -webkit-animation-name: fadeInUp;
+        animation-name: fadeInUp;
+    }
+    
+    @-webkit-keyframes fadeInUp {
+        from {
+            opacity: 0;
+            -webkit-transform: translate3d(0, 2em, 0);
+            transform: translate3d(0, 2em, 0);
+        }
+        to {
+            opacity: 1;
+            -webkit-transform: none;
+            transform: none;
+        }
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            -webkit-transform: translate3d(0, 2em, 0);
+            transform: translate3d(0, 2em, 0);
+        }
+        to {
+            opacity: 1;
+            -webkit-transform: none;
+            transform: none;
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <form action="xxoo" submit="$event.preventDefault()">
+        <input model="newItem" keydown="$event.keyCode==13&&(console.log(newItem),newItem)&& (console.log(newItem), add(newItem))" autofocus>
+        <a href="http://baidu.com/s?wd={{newItem}}" clickx="$event.preventDefault()">{{newItem}}</a>
+    </form>
+    <ul>
+        <li each="item in list" class="fadeInUp-enter fadeInUp-transition" .style="{'animation-delay': ($index>10?10:$index)*0.0515 +'s'}" xclick="console.log($this,this)">
+            <input model="item"> {{item}}
+            <button click="remove($index);">-</button>
+        </li>
+        <li if="!list.length">什么都没有</li>
+    </ul>
+    <script>
+    vm = domTpl({
+        list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+        load: function () {
+        },
+        add: function(item, e) {
+            console.log('add')
+            this.list.push(item);
+            this.newItem = '';
+        },
+        remove: function(i) {
+            this.list.splice(i, 1);
+        }
+    });
+
+    vm.load();
+
+
+    </script>
+</body>
+
+</html>

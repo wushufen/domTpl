@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../domTpl.js"></script>
+  </head>
+  <body>
+    <ul>
+      <li each="item in list" if="item.age>18">
+        {{item.name}}
+      </li>
+    </ul>
+    <script>
+      domTpl({
+        list: [
+          {name:'tom', age:20},
+          {name:'lily', age:17}
+        ]
+      });
+    </script>
+  </body>
+</html>

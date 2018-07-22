@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+    <link rel="stylesheet" href="../../lib/animate.css">
+	<script src="../domTpl.js"></script>
+	<style>
+		.cur{background: #eee;}
+	</style>
+</head>
+<body>
+	<div if="1">if</div>
+	<ul>
+		<li each="item in list" attr-class="{cur: cur==$index}" class="animated zoomInRight" style="animation-delay: {{$index*0.15}}s">{{item}}</li>
+	</ul>
+	<script>
+		var scope = {
+			list:[1,2,3,4,5,7],
+			cur: 0
+		}
+		r=domTpl(scope);
+		// setInterval(function () {
+		// 		scope.cur +=1;
+		// 		if (scope.cur>=scope.list.length) {
+		// 			scope.cur = 0;
+		// 		}
+		// 		r();
+		// },300);
+	</script>
+</body>
+</html>

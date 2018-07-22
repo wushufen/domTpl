@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="MobileOptimized" content="320">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="browsermode" content="application">
+    <meta name="x5-page-mode" content="app">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title></title>
+</head>
+
+<body>
+    <div class="container" data="{a:1}">
+        hello {{ world }} !
+        <ul>
+            <li if-for="true" for="item in list"></li>
+        </ul>
+        <ul title="{{'title'}}">
+            <li wu="text('abc'), href(123), src('ok'), click('alert()')"></li>
+        </ul>
+        <!-- {{123}} -->
+        <!--  -->
+    </div>
+    <script type="text/javascript">
+    	world  = ' world !!'
+    </script>
+    <script type="text/javascript" src="../wu.mvvm.js"></script>
+</body>
+
+</html>

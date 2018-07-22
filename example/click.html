@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="../domTpl.js"></script>
+</head>
+
+<body>
+    <h1>{{title||'请填写标题'}}</h1>
+    <input model="title" keydown="$event.keyCode==13&&add(title);">
+    <button click="add(title)">add</button>
+    <ul>
+        <li each="item in list">
+            {{item.name}}:{{item.age}}
+            <input model="item.age">
+            <button click="remove($index)" type="button">删除</button>
+        </li>
+        <li if="!list.length">什么都没了</li>
+    </ul>
+    <script>
+    // (function() {
+
+    view = domTpl({
+        title: 'this is title',
+        list: [{
+            name: 'Tom',
+            age: 18
+        }, {
+            name: 'Lily',
+            age: 16
+        }],
+        add: function(name) {
+            this.list.push({
+                name: name,
+                age: 18
+            });
+            this.title = '';
+        },
+        remove: function(i) {
+            this.list.splice(i, 1)
+        }
+    });
+
+    view.add()
+
+
+    // }());
+    </script>
+</body>
+
+</html>

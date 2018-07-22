@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../domTpl.js"></script>
+  </head>
+  <body>
+    
+    <input model="phone" keyup="formatPhone();" placeholder="请输入手机号码">
+    {{phone}}
+
+    <br />
+    <div>
+      <input model="user.fullName" input="splitName()">
+      <input model="user.firstName" input="joinName()">
+      <input model="user.lastName" input="joinName()">
+      {{user.firstName}}{{user.lastName?"#":''}}{{user.lastName}}
+    </div>
+
+    <div id="url">
+      <input model="href" input="splitUrl()">
+      <input model="protocol" input="joinUrl()">
+      <input model="host" input="joinUrl()">
+      <input model="pathname" input="joinUrl()">
+      <input model="search" input="joinUrl()">
+      <input model="hash" input="joinUrl()">
+    </div>
+    <script>
+      vmUrl = domTpl(url, {
+        splitUrl: function () {
+          var m, v;
+          m = this.href.match(/^.*?:\/\//)||[];
+          this.protocol = m[0];
+          m = this.href.match(/:\/\/(.*?)(\/|$)/)||[];
+          this.host = m[1]
+          
+        },
+        joinUrl: function () {
+          this.href = this.protocol+this.host+this.pathname+this.search+this.hash
+        }
+      });
+    </script>
+
+    <script>
+      vm=domTpl({
+        // user:{},
+        splitName: function () {alert()
+          var user = this.user;
+          var f_l =  user.fullName.split(' ');
+          user.firstName =f_l[0];
+          user.lastName =f_l[1]||'';
+          console.log(user.fullName, user.firstName, user.lastName)
+        },
+        joinName: function () {
+          var user = this.user;
+          user.fullName = user.firstName + ' ' + user.lastName;
+          console.log(user.fullName, user.firstName, user.lastName)
+        },
+        formatPhone: function () {
+          this.phone=this.phone.replace(/\D/g, '')
+            .replace(/^(\d{3})(\d)/, '$1-$2')
+            .replace(/-(\d{4})(\d)/, '-$1-$2')
+            .replace(/(-\d{4})[^-]*$/, '$1');
+        }
+      });
+    </script>
+  </body>
+</html>

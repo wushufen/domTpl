@@ -9,15 +9,15 @@
   </style>
 </head>
 <body>
-  <strong>{{dateFormat(date, 'hh:mm:ss')}}</strong>
+  <strong>{{dateFormat(date, 'HH:mm:ss')}}</strong>
   <small>{{dateFormat(date, 'SSS')}}</small>
   <div>
     <small>{{dateFormat(date, 'yyyy-MM-dd E')}}</small>
   </div>
   <script>
-    var render = domTpl();
+    var dom = domTpl();
     (function run(){
-      render({
+      dom.$render({
         date: new Date
       });
 
@@ -42,7 +42,7 @@
       }
 
       return format.replace(/E+/g, function(){
-        return '星期'+'日一二三四五六'[date.getDay()]
+        return '星期'+'日一二三四五六'.charAt(date.getDay());
       })
     }
   </script>

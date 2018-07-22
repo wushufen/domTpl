@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../domTpl.js"></script>
+  </head>
+  <body>
+    <ul>
+      <li each="item in [1,2,3]">
+        <img data-src="https://avatars2.githubusercontent.com/u/6390515?s={{$index*10+20}}">
+      </li>
+    </ul>
+    <div id="sub">
+      {{n}}
+    </div>
+    <script>
+      // sub
+      var render = domTpl(sub,{n:1}).$render;
+
+      setInterval(function () {
+        render({
+          n: Math.random()
+        })
+      },100)
+
+      // global
+      // domTpl()();
+    </script>
+  </body>
+</html>

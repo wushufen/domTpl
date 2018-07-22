@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="domTpl.2.0.js"></script>
+</head>
+<body>
+
+
+    <script>
+
+	    (function () {
+	    	    	
+
+    	var div = document.createElement('div');
+    	div.innerHTML = 'div';
+
+    	var title = document.createAttribute('title');
+    	title.nodeValue = 'title';
+    	div.setAttributeNode(title);
+
+    	div.setAttribute('href', 'http://baidu.com');
+
+    	var textNode = document.createTextNode('textNode');
+    	textNode.nodeValue = '  ^^textNode';
+
+    	div.appendChild(textNode);
+
+    	document.body.appendChild(div)
+
+
+    	// ie error
+    	// title.nid = 2;
+    	// textNode.value = 2;
+    	// textNode.nid = 2;
+
+
+    	// saveNode
+    	var divId = saveNode(div);
+    	test(divId == 1);
+    	test(nodeMap[1]==div);
+
+    	var titleId = saveNode(title);
+    	test(nodeMap[titleId]=title);
+    	test(title.value == titleId);
+
+    	var textId = saveNode(textNode);
+    	test(nodeMap[textId]=textNode);
+    	test(textNode.nodeValue == textId);
+
+    	// getNodeId
+    	div.nid = 111;
+    	test(getNodeId(div) == 111);
+    	div.nid = divId;
+    	test(getNodeId(div)== divId);
+
+    	title.nodeValue = '222   ';
+    	test(getNodeId(title) == 222);
+    	title.nodeValue = titleId+'   ';
+    	test(getNodeId(title) == titleId);
+
+    	textNode.nodeValue = '333   ';
+    	test(getNodeId(textNode) == 333);
+    	textNode.nodeValue = textId+'   ';
+    	test(getNodeId(textNode) == textId);
+
+    	// getNode
+    	test(getNode(divId)==div);
+    	test(getNode(titleId)==title);
+    	test(getNode(textId)==textNode);
+
+    	// each
+    	// todo
+    	// 
+    	
+    	// cloneNode
+    	// todo
+    	// 
+    	
+    	// text
+    	text(getNodeId(title), ' set title');
+    	test(title.nodeValue == ' set title');
+    	title.nodeValue = titleId;
+
+    	text(getNodeId(textNode), ' set text');
+    	test(textNode.nodeValue == ' set text');
+    	text.nodeValue = textId;
+
+    	// if
+    	// var i = 0;
+    	// setInterval(function () {
+    	// 	i++
+	    // 	if_(divId, i%2==0)
+    	// }, 1000)
+    	
+
+
+    	// setMark
+    	var mark = setMark(div, 0, 'div mark');
+    	// test(div.mark == mark);
+    	// test(mark.node == div);
+    	// alert(div.parentNode.nodeName) // ie *****
+    	mark.parentNode.insertBefore(div, mark)
+
+
+    	// getVars
+    	// alert(getVars({a:1,b:2}))
+
+
+    	// parse
+    	// alert(parse('{{a+b}}'))
+
+
+
+
+    	function test(bool) {
+    		if(!bool)alert('fail');
+    	}
+
+
+
+	    }());
+
+    </script>
+
+
+</body>
+</html>

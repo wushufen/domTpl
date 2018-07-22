@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../domTpl.js"></script>
+  </head>
+  <body>
+    <div each="i in [1,2,3]" html="tpl">---</div>
+
+    <script id="tpl" type="text/html">
+      <button>button</button>
+    </script>
+    
+    <script>
+      domTpl({
+        tpl: tpl.innerHTML
+      });
+    </script>
+  </body>
+</html>

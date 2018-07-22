@@ -1,4 +1,4 @@
-<html>
+<html id="html">
 
 <head>
     <meta charset="utf-8">
@@ -15,32 +15,35 @@
     条数据，并更新 dom
     <button type="button" onclick="pause=!pause; render()">{{pause?'start':'stop'}}</button>
     <ul>
-        <li each="item in list">
+        <li v-for="item in list">
             {{$index}}:{{item}}
-            <span if="item>0.5">{{item>0.5}}</span>
+            <span v-if="item>0.5">{{item>0.5}}</span>
         </li>
     </ul>
     <script>
-    list = [];
+    list = [1];
     list.length = 20;
 
     pause = false;
     </script>
-    <script src="../domTpl.js"></script>
+    <script src="../lib/vue.min.js"></script>
     <script>
-    vm = domTpl()
-    render = vm.$render
-    render()
+    var vue = new Vue({
+      el:'#html',
+      data:{
+        list:list
+      }
+    });
 
     var lastDate = new Date;
     t = setInterval(function() {
     	if (pause) {return}
 
         for (var li = 0; li < list.length; li++) {
-            list[li] = Math.random()>0.5?'xxxxxxxxxxxxxx':'yyyyyyyyyyyyyy---------------'
+            list.$set(li, Math.random())
         }
 
-        render();
+        // render();
 
         var now = new Date;
         document.title = now - lastDate;

@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <script src="../domTpl.js"></script>
-  </head>
-  <body>
+</head>
+
+<body>
     <ul>
-      <li each="item in list">
-        {{item.name}}
-        <span if="item.age>=18">, is adult</span>
-      </li>
+        <li each="item in list" title="{{item.age}}岁">
+            {{item.name}}
+            <span if="item.age>=18">, is adult</span>
+        </li>
     </ul>
     <script>
-      var render = domTpl();
-      render({
+    vm=domTpl({
         list: [
-          {name:'tom', age:20},
-          {name:'lily', age:17}
+            {name: 'tom', age: 20 }, 
+            {name: 'lily', age: 17 }
         ]
-      });
+    });
     </script>
-  </body>
+</body>
+
 </html>

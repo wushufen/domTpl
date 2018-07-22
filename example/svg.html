@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="../domTpl.js"></script>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="500" height="500">
+  <polygon .points="(x||0) +','+ y +',100,20 30,300'"
+  style="fill:#6CD8F6;stroke:white;stroke-width:1"/>
+</svg>
+<input model="x" type="input" name="">
+<input model="y" type="range" name="">
+
+<script>
+	svg=domTpl({
+		x: 10,
+		y: 10
+	})
+</script>
+
+</body>
+</html>

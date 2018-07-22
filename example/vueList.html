@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <script src="../lib/vue.min.js"></script>
+</head>
+
+<body id="body">
+    <form onsubmit="return false" on-submit="add()">
+        <input model="title">
+    </form>
+    <ul>
+        <li v-for="todo in todoList" data-class="{checked:todo.checked}">
+            <input v-model="todo">
+            <span>{{todo}}</span>
+            <button on-click="todo.checked=!todo.checked" type="button">v</button>
+            <button on-click="remove($index)" type="button">-</button>
+        </li>
+        <li if="!todoList.length">没有数据</li>
+    </ul>
+    <script>
+        var v = new Vue({
+            el: 'body',
+            data:{
+                todoList:[
+                    1,
+                    2,
+                    3
+                ],
+            },
+            methods:{
+                
+            }
+        });
+    </script>
+</body>
+
+</html>

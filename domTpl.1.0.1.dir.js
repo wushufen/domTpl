@@ -15,6 +15,25 @@
             // console.log(node.nodeName + ': ' +(node.nodeValue||node.innerHTML))
 
             if (node.nodeType == 1 && !node.nid) { // && 防止重复
+
+
+                // dirs
+                var attributes = toArray(node.attributes);
+                for (var i = 0; i < attributes.length; i++) {
+                    var attr = attributes[i];
+                    var attrName = attr.name;
+                    var dir = dirMap[attrName];
+                    if (dir) {
+                        dir({
+                            node: node,
+                            attr: attr,
+                        })
+                    }
+                }
+
+
+
+
                 var nid;
 
                 // each start: each 最优先，其它指令归为克隆节点
@@ -67,11 +86,11 @@
 
                 // text
                 // ie getAttribute('text') 属性并不是获取书写时的值，而是获取 innerHTML
-                // var textStr = getAttr(node, 'text');
-                // if (validate(textStr, node)) {
-                //     var nid = nid || setNodeId(node);
-                //     code += indent() + '_$.text(' + nid + ', ' + tryValue(textStr, '""') + ')\n';
-                // }
+                var textStr = getAttr(node, 'text');
+                if (validate(textStr, node)) {
+                    var nid = nid || setNodeId(node);
+                    code += indent() + '_$.text(' + nid + ', ' + tryValue(textStr, '""') + ')\n';
+                }
 
                 // html
                 var htmlStr = getAttr(node, 'html');
@@ -107,15 +126,6 @@
             } else if (node.nodeType == 2 || node.nodeType == 3) {
                 var nodeValue = node.nodeValue + ''; // ie null or bool
 
-
-                // ie getAttribute('text') 属性并不是获取书写时的值，而是获取 innerHTML
-                if (node.name == 'text' && validate(nodeValue, owner)) {
-                    getAttr(owner, node.name);
-                    var ownerNid = setNodeId(owner);
-                    code += indent() + '_$.text(' + ownerNid + ', ' + tryValue(nodeValue, '""') + ')\n';
-                    return;
-                }
-
                 // attr-* :* .*
                 var name = node.name + '';
                 var attrName = (name.match(/^(attr-|:|\.)(.*)/) || [])[2];
@@ -134,6 +144,17 @@
                             code += indent() + '_$.attr(' + ownerNid + ', "' + attrName + '", ' + tryValue(nodeValue, '""') + ', _data_)\n';
                     }
                 }
+
+                addDir('html', function(opts) {
+                    opts.node.innerHTML = opts.value;
+                });
+                addDir(/^(\.|:\attr-)(.*)/, function(opts) {
+                    opts.node.setAttribute(opts.$2, opts.value);
+                });
+
+                addDir('input,abort,blur,change,click', function (opts) {
+                    
+                })
 
                 // {{}}
                 if (nodeValue.match('{{')) {
@@ -255,7 +276,6 @@
             var nid = getNodeId(node);
             nid && setNodeId(_node, nid + '.' + eachIndex); //**
             if (node.nodeType == 1) {
-
                 var attributes = node.attributes;
                 var _attributes = _node.attributes;
                 for (var i = 0; i < attributes.length; i++) {
@@ -263,7 +283,6 @@
                         loop(attributes[i], _attributes[i]);
                     }
                 }
-                
                 var childNodes = node.childNodes;
                 var _childNodes = _node.childNodes;
                 for (var i = 0; i < childNodes.length; i++) {
@@ -340,7 +359,6 @@
         var mark = node.mark;
         if (!mark) {
             mark = document.createComment('domTpl:' + name + ' ' + getNodeId(node));
-            mark = document.createTextNode('');
             node.parentNode.insertBefore(mark, node);
             node.mark = mark;
             mark.node = node;
@@ -417,9 +435,6 @@
                     var nid = getNodeId(node);
                     var fn = eventMap[eventType][nid];
                     if (fn) {
-                        if (eventType=='keydown') {
-                            console.log(fn)
-                        }
                         // 执行事件回调
                         fn(node, e);
                         // 并更新视图
@@ -430,8 +445,6 @@
 
             }
         }
-        // eventMap[eventType][nid] || (eventMap[eventType][nid]=fn)
-        // 必须每次替换 fn，之前的 fn 保持前一状态的 scpoe，使用到变量不会跟着变
         eventMap[eventType][nid] = fn;
     }
 
@@ -449,8 +462,8 @@
             node.value = value || '';
             obj[key] = node.value; // undefined -> ''  // 或 select 的 option 已不存在
 
-            // node.value = obj[key]; // 当 select 的 option 已不存在，把它置为 "";
-            // obj[key] = node.value; // 再确保是一致的
+            node.value = obj[key]; // 当 select 的 option 已不存在，把它置为 "";
+            obj[key] = node.value; // 再确保是一致的
 
             bool && (node.selectionStart = node.selectionEnd = selectionStart);
         }

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <script src="domTpl.js"></script>
+    <style>
+    td {
+        border: solid 1px;
+    }
+    </style>
+</head>
+
+<body>
+    heading:{{heading||'or heading'}}
+    {{exx}}
+    <img data-src="{{''}}">
+    <!-- <div if="0">if</div> -->
+    <table>
+        <tr each="row in list" data-class="{class1:bool}" if="n!=$index"> 
+            <td>{{$index}}:</td>
+            <td each="col in row">{{col}}</td>
+            <td if="col+2==3">{{'-'}}</td>
+        </tr>
+        <tr if="!list"><td>什么都没有</td></tr>
+    </table>
+    <script type="x">
+    domTpl({
+        list: [
+            [11, 12, 13],
+            [14, 15, 16]
+        ]
+    })
+    </script>
+    1:
+    <table>
+        <!-- 
+            <tr xeach="row in list" nid="2">
+                <td> 3:</td>
+                <td xeach="col in row" nid="4"> 5: </td>
+                <td> 6: </td>
+            </tr>
+ -->
+        <tr xeach="row in list" nid="2.0">
+            <td> 3.0:</td>
+            <!-- <td xeach="col in row" nid="4.0"> 5.0: </td> -->
+            <td xeach="col in row" nid="4.0.0"> 5.0.0: </td>
+            <td xeach="col in row" nid="4.0.1"> 5.0.1: </td>
+            <td xeach="col in row" nid="4.0.2"> 5.0.2: </td>
+            <td xif="true" nid="6.0"> 7.0: </td>
+        </tr>
+        <tr xeach="row in list" nid="2.1">
+            <td> 3.1:</td>
+            <!-- <td xeach="col in row" nid="4.1"> 5.1: </td> -->
+            <td xeach="col in row" nid="4.1.0"> 5.1.0: </td>
+            <td xeach="col in row" nid="4.1.1"> 5.1.1: </td>
+            <td xeach="col in row" nid="4.1.2"> 5.1.2: </td>
+            <td xif="true" nid="6.1"> 7.1: </td>
+        </tr>
+    </table>
+    <script>
+    heading = 'hello'
+
+    xlist = [
+        [1, 2, 3],
+        [4, 5, 6]
+    ]
+
+    r = domTpl(document.body);
+    r({
+        heading: 'r@heading',
+        list:[
+            [11, 12, 13],
+            [14, 15, 16]
+    ]
+    });
+    </script>
+    <script type="x">
+
+    text(1, '1')
+
+    each(2, list, function(row) {
+
+        text(3, '    3')
+
+        each(4, row, function(col) {
+            text(5, '        5')
+        })
+
+        text(6, '    6')
+
+    })
+    </script>
+</body>
+
+</html>

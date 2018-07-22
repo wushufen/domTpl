@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="../domTpl.js"></script>
+</head>
+
+<body>
+    <form>
+        <p>{{value||'________'}}</p>
+        <input type="text" model="value" autofocus>
+        <input type="checkbox" name="value" :value="c1" autofocus>
+        <input type="checkbox" name="value" value="c2" autofocus>
+        <input type="radio" model="value" autofocus>
+        <input type="radio" model="value" autofocus>
+    </form>
+    <!-- 3.渲染 -->
+    <script>
+    domTpl();
+    </script>
+</body>
+
+</html>
