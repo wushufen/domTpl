@@ -5,10 +5,10 @@
   .value="value"
   .oninput="model=this.value" 
   .onclick.stop.prevent="remove(item)"
-  .innerHTML="html"
-  .innerText="text"
   .src="src"
   .title="title"
+  .innerHTML="html"
+  .innerText="text"
  >
   {{exp}}
  </div>
