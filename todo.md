@@ -10,6 +10,10 @@
   .title="title"
   .innerHTML="html"
   .innerText="text"
+  .hidden="bool"
+  .disabled="bool"
+  .style="{}"
+  .class="{}"
  >
   {{exp}}
  </div>
