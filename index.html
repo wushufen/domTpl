@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<div id="app">
+		{{value}}
+		<span .innerText="value"></span>
+		<div .innerHTML="value"></div>
+		<div if="value">if</div>
+		<div for="(item,key,index) in list" .onclick="alert(item.name)">
+			<input .value="item.name" .oninput="item.name=this.value">
+			<input .model.trim="item.name">
+		</div>
+		<div is="component"></div>
+	</div>
+
+	<script src="domTpl.js"></script>
+	<script>
+		
+	</script>
+</body>
+</html>
