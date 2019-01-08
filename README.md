@@ -50,8 +50,8 @@ redner(data): 编译返回的渲染函数
 ```
 
 ## EXAMPLE
-* [hello world](https://cdn.rawgit.com/wusfen/domTpl/master/example/helloWorld.html) | [源码](example/helloWorld.html)
-* [list](https://cdn.rawgit.com/wusfen/domTpl/master/example/list.html) | [源码](example/list.html)
-* [ajax](https://cdn.rawgit.com/wusfen/domTpl/master/example/ajax.html) | [源码](example/ajax.html)
-* [time 时钟](https://cdn.rawgit.com/wusfen/domTpl/master/example/time.html) | [源码](example/time.html)
-* [performance test 性能测试](https://cdn.rawgit.com/wusfen/domTpl/master/example/bigArray.html) | [源码](example/bigArray.html)
+* [hello world](https://wusfen.github.io/domTpl/example/helloWorld.html) | [源码](example/helloWorld.html)
+* [list](https://wusfen.github.io/domTpl/example/list.html) | [源码](example/list.html)
+* [ajax](https://wusfen.github.io/domTpl/example/ajax.html) | [源码](example/ajax.html)
+* [time 时钟](https://wusfen.github.io/domTpl/example/time.html) | [源码](example/time.html)
+* [performance test 性能测试](https://wusfen.github.io/domTpl/example/bigArray.html) | [源码](example/bigArray.html)
