@@ -13,10 +13,13 @@
 <!DOCTYPE html>
 <html>
   <head>
+
     <!-- 1.引入 domTpl.js -->
     <script src="../domTpl.js"></script>
+
   </head>
   <body>
+
     <!-- 2.模板 -->
     <ul>
       <li each="item in list">
@@ -24,6 +27,7 @@
         <span if="item.age>=18">adult</span>
       </li>
     </ul>
+
     <!-- 3.渲染 -->
     <script>
     var render = domTpl();
@@ -34,6 +38,7 @@
       ]
     });
     </script>
+
   </body>
 </html>
 ```
